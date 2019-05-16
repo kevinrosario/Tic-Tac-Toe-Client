@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Example</title>
+      <title>Tic-Tac-Toe</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Do not add `link` tags-->
@@ -12,6 +12,181 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <h1>Browser Template</h1>
+      <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <h2 class="navbar-brand">
+            Tic-Tac-Toe
+          </h2>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBarContent" aria-controls="navBarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navBarContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Rules</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Change Password</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Account</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Log-Out</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <div class="container" id="main-page">
+          <div class="row" id="sign-in-box">
+            <div class="col-sm-12 box">
+              <div class="card text-white bg-dark mb-3">
+                <div class="card-header">
+                  Sign-In
+                </div>
+                <div class="card-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="sign-in-email">Email address</label>
+                      <input type="email" name="sign-in-email" class="form-control" id="credentials[email]" aria-describedby="emailHelp" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                      <label for="sign-in-password">Password</label>
+                      <input type="password" name="credentials[password]" class="form-control" id="sign-in-password" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+                </div>
+                <div class="card-footer bg-transparent">
+                  <label>New User?
+                    <a class="sign-up" data-toggle="modal" data-target="#signUpModal">Sign-up</a>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="container" id="board">
+          <div class="row">
+            <div class="col-lg-9">
+              <div class="row game-board">
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-4 square upper first not-selected">X</div>
+                    <div class="col-4 square upper second not-selected">O</div>
+                    <div class="col-4 square upper third not-selected"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4 square middle first not-selected"></div>
+                    <div class="col-4 square middle second not-selected"></div>
+                    <div class="col-4 square middle third not-selected"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4 square bottom first not-selected"></div>
+                    <div class="col-4 square bottom second not-selected"></div>
+                    <div class="col-4 square bottom third not-selected"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="row down">
+                    <div class="col-4">
+                      Player(x)
+                    </div>
+                    <div class="col-4">
+                      Ties
+                    </div>
+                    <div class="col-4">
+                      Player(O)
+                    </div>
+                  </div>
+                  <div class="row down">
+                    <div class="col-4">
+                      <div class="x-score">
+                        0
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="tie">
+                        0
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="o-score">
+                        0
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 restart">
+                    <div class="row">
+                      <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          1P
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#">Single Player</a>
+                          <a class="dropdown-item" href="#">Double Player</a>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Restart</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 side"> Available Games
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer>
+      </footer>
+
+      <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Sign Up</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="card-body">
+                <form>
+                  <div class="form-group">
+                    <label for="sign-up-email">Email address</label>
+                    <input type="email" name="credentials[email]" class="form-control" id="sign-up-email" aria-describedby="emailHelp" placeholder="Enter email">
+                  </div>
+                  <div class="form-group">
+                    <label for="sign-up-password">Password</label>
+                    <input type="password" name="credentials[password]" class="form-control" id="sign-up-password" placeholder="Password">
+                  </div>
+                  <div class="form-group">
+                    <label for="sign-up-password-confirmation">Confirm Password</label>
+                    <input type="password" name="credentials[password]" class="form-control" id="sign-up-password-confirmation" placeholder="Password">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </body>
 </html>

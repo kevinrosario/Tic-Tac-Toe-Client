@@ -8,4 +8,6 @@
 
 $(() => {
   // your JS code goes here
+  $('#board').hide()
+  // $('#main-page').hide()
 })

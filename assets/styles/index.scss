@@ -1,1 +1,104 @@
 @import '~bootstrap/scss/bootstrap';
+@import './colors';
+@import './theme';
+
+html,
+body {
+  background-color: $main-color;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  align-items: center;
+  display: flex;
+  min-height: 90%;
+}
+
+.box,
+.square {
+  align-items: center;
+  background-color: $main-color;
+  color: $black;
+  display: flex;
+  justify-content: center;
+}
+
+.down {
+  font-weight: bold;
+  text-align: center;
+}
+
+.first,
+.second {
+  border-right: 4px solid $black;
+}
+
+.game-board {
+  padding: 10px;
+}
+
+.square {
+  font-size: 80px;
+  font-weight: bold;
+  height: 100px;
+}
+
+.sign-up {
+  text-decoration-color: $baby-blue;
+}
+
+.upper,
+.middle {
+  border-bottom: 4px solid $black;
+
+}
+
+.restart {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.not-selected:hover {
+  background-color: $light-blue;
+  cursor: pointer;
+}
+
+
+@media (min-width: 576px) {
+  .square {
+    font-size: 100px;
+    height: 150px;
+    min-width: 150px;
+  }
+
+  .down {
+    font-size: 28px;
+  }
+}
+
+@media (min-width: 768px) {
+  .square {
+    font-size: 130px;
+    height: 200px;
+    min-width: 210px;
+  }
+}
+
+@media (min-width: 992px) {
+  .square {
+    font-size: 150px;
+    height: 220px;
+    min-width: 220px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .square {
+    font-size: 200px;
+    height: 250px;
+    min-width: 250px;
+  }
+}
