@@ -32,14 +32,11 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">About</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Change Password</a>
+              <li class="nav-item logged-in hide">
+                <a class="nav-link" id="account-modal" href="#" data-toggle="modal" data-target="#accountModal">Account</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Account</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Log-Out</a>
+              <li class="nav-item logged-in hide">
+                <button class="btn btn btn-secondary my-2 my-sm-0" type="submit" id="log-out">Log-Out</button>
               </li>
             </ul>
           </div>
@@ -54,14 +51,14 @@
                   Sign-In
                 </div>
                 <div class="card-body">
-                  <form>
+                  <form class="form" id="sign-in">
                     <div class="form-group">
                       <label for="sign-in-email">Email address</label>
-                      <input type="email" name="sign-in-email" class="form-control" id="credentials[email]" aria-describedby="emailHelp" placeholder="Enter email">
+                      <input type="email" name="credentials[email]" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" required>
                     </div>
                     <div class="form-group">
                       <label for="sign-in-password">Password</label>
-                      <input type="password" name="credentials[password]" class="form-control" id="sign-in-password" placeholder="Password">
+                      <input type="password" name="credentials[password]" class="form-control" placeholder="Password" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
@@ -77,25 +74,25 @@
         </div>
 
 
-        <div class="container" id="board">
+        <div class="container logged-in hide" id="board">
           <div class="row">
             <div class="col-lg-9">
-              <div class="row game-board">
-                <div class="col-12">
-                  <div class="row">
-                    <div class="col-4 square upper first not-selected">X</div>
-                    <div class="col-4 square upper second not-selected">O</div>
-                    <div class="col-4 square upper third not-selected"></div>
+              <div class="row">
+                <div class="col-12 game-board">
+                  <div class="row game-row">
+                    <div class="col-4 square upper first not-selected" data-id=0></div>
+                    <div class="col-4 square upper second not-selected" data-id=1></div>
+                    <div class="col-4 square upper third not-selected" data-id=2></div>
                   </div>
-                  <div class="row">
-                    <div class="col-4 square middle first not-selected"></div>
-                    <div class="col-4 square middle second not-selected"></div>
-                    <div class="col-4 square middle third not-selected"></div>
+                  <div class="row game-row">
+                    <div class="col-4 square middle first not-selected" data-id=3></div>
+                    <div class="col-4 square middle second not-selected" data-id=4></div>
+                    <div class="col-4 square middle third not-selected" data-id=5 ></div>
                   </div>
-                  <div class="row">
-                    <div class="col-4 square bottom first not-selected"></div>
-                    <div class="col-4 square bottom second not-selected"></div>
-                    <div class="col-4 square bottom third not-selected"></div>
+                  <div class="row game-row">
+                    <div class="col-4 square bottom first not-selected" data-id=6></div>
+                    <div class="col-4 square bottom second not-selected" data-id=7></div>
+                    <div class="col-4 square bottom third not-selected" data-id=8></div>
                   </div>
                 </div>
               </div>
@@ -114,17 +111,17 @@
                   </div>
                   <div class="row down">
                     <div class="col-4">
-                      <div class="x-score">
+                      <div id="x-score">
                         0
                       </div>
                     </div>
                     <div class="col-4">
-                      <div class="tie">
+                      <div id="ties">
                         0
                       </div>
                     </div>
                     <div class="col-4">
-                      <div class="o-score">
+                      <div id="o-score">
                         0
                       </div>
                     </div>
@@ -132,14 +129,14 @@
                   <div class="col-12 restart">
                     <div class="row">
                       <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          1P
+                        <button id="players-button" class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          2P
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#">Single Player</a>
-                          <a class="dropdown-item" href="#">Double Player</a>
+                          <a class="dropdown-item" href="#" id="single-player">Single Player</a>
+                          <a class="dropdown-item active" href="#" id="double-player">Double Player</a>
                         </div>
-                        <button class="btn btn-primary" type="submit">Restart</button>
+                        <button id="restart-button" class="btn btn-primary" type="button">Restart</button>
                       </div>
                     </div>
                   </div>
@@ -158,25 +155,64 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Sign Up</h5>
+              <h5 class="modal-title">Sign Up</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
               <div class="card-body">
-                <form>
+                <form class="form" id="sign-up">
                   <div class="form-group">
                     <label for="sign-up-email">Email address</label>
-                    <input type="email" name="credentials[email]" class="form-control" id="sign-up-email" aria-describedby="emailHelp" placeholder="Enter email">
+                    <input type="email" name="credentials[email]" class="form-control" id="sign-up-email" aria-describedby="emailHelp" placeholder="Enter email" required>
                   </div>
                   <div class="form-group">
                     <label for="sign-up-password">Password</label>
-                    <input type="password" name="credentials[password]" class="form-control" id="sign-up-password" placeholder="Password">
+                    <input type="password" name="credentials[password]" class="form-control" id="sign-up-password" placeholder="Password" required>
                   </div>
                   <div class="form-group">
                     <label for="sign-up-password-confirmation">Confirm Password</label>
-                    <input type="password" name="credentials[password]" class="form-control" id="sign-up-password-confirmation" placeholder="Password">
+                    <input type="password" name="credentials[password_confirmation]" class="form-control" id="sign-up-password-confirmation" placeholder="Password" required/>
+                  </div>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Account</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div>
+                <span>Games Finished:</span>
+                <span id="games-finished">0</span>
+              </div>
+              <div>
+                <span>Games started</span>
+                <span id="games-started">0</span>
+              </div>
+              <hr>
+              <div class="card-body">
+                <form class="form" id="change-password">
+                  <h5>Change Password:</h5>
+                  <div class="form-group">
+                    <label for="old-password">Enter Old Password:</label>
+                    <input type="password" name="passwords[old]" class="form-control" id="old-password" placeholder="Old Password" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="new-password">Enter New Password:</label>
+                    <input type="password" name="passwords[new]" class="form-control" id="new-password" placeholder="New Password" required/>
                   </div>
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -184,6 +220,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
             </div>
           </div>
         </div>

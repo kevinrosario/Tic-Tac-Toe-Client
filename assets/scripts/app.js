@@ -6,8 +6,25 @@
 // use require without a reference to ensure a file is bundled
 // require('./example')
 
+const handler = require('./events.js')
+
 $(() => {
   // your JS code goes here
-  $('#board').hide()
-  // $('#main-page').hide()
+  $('#sign-in').on('submit', handler.onSignIn)
+
+  $('#sign-up').on('submit', handler.onSignUp)
+
+  $('#log-out').on('click', handler.onLogOut)
+
+  $('#change-password').on('submit', handler.onChangePassword)
+
+  $('.square').click(handler.onSquareClicked)
+
+  $('#restart-button').on('click', handler.onRestart)
+
+  $('#single-player').on('click', handler.onSinglePlayer)
+
+  $('#double-player').on('click', handler.onDoublePlayer)
+
+  $('#account-modal').on('click', handler.onGetGames)
 })
