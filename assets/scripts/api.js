@@ -89,6 +89,26 @@ const getFinishedGames = () => {
   })
 }
 
+const joinGame = (game) => {
+  return $.ajax({
+    url: config.apiUrl + '/games/' + game.game.id,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const getGame = (id) => {
+  return $.ajax({
+    url: config.apiUrl + '/games/' + id,
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   signIn,
   signUp,
@@ -97,5 +117,7 @@ module.exports = {
   create,
   update,
   getGames,
-  getFinishedGames
+  getFinishedGames,
+  joinGame,
+  getGame
 }

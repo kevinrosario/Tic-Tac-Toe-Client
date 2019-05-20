@@ -25,13 +25,13 @@ main {
   justify-content: center;
 }
 
-.hide {
-  display: none;
-}
-
 .down {
   font-weight: bold;
   text-align: center;
+}
+
+.error {
+  color: $red;
 }
 
 .first,
@@ -40,7 +40,15 @@ main {
 }
 
 .game-board {
-  padding: 10px;
+  margin: 10px;
+}
+
+.hide {
+  display: none;
+}
+
+.sign-up {
+  text-decoration-color: $baby-blue;
 }
 
 .square {
@@ -49,37 +57,55 @@ main {
   height: 100px;
 }
 
-.sign-up {
-  text-decoration-color: $baby-blue;
-}
-
-.upper,
-.middle {
-  border-bottom: 4px solid $black;
-
-}
-
 .restart {
   align-items: center;
   display: flex;
   justify-content: center;
 }
 
-.not-selected:hover {
-  background-color: $light-blue;
+.clickable {
   cursor: pointer;
 }
 
+.upper,
+.middle {
+  border-bottom: 4px solid $black;
+}
+
+.win-horizontal {
+  border-bottom: 4px solid $white;
+}
+
+.win-vertical {
+  border-right: 4px solid $white;
+}
+
+.tie-horizontal {
+  border-bottom: 4px solid $red;
+}
+
+.tie-vertical {
+  border-right: 4px solid $red;
+}
 
 @media (min-width: 576px) {
+  .game-board {
+    margin: 0;
+  }
+
   .square {
     font-size: 100px;
     height: 150px;
-    min-width: 150px;
+    min-width: 130px;
   }
 
   .down {
     font-size: 28px;
+  }
+
+  .not-selected:hover {
+    background-color: $light-blue;
+    cursor: pointer;
   }
 }
 

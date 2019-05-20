@@ -17,23 +17,15 @@
           <h2 class="navbar-brand">
             Tic-Tac-Toe
           </h2>
+          <h2 id="error"class="error hide">Something went wrong!</h2>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBarContent" aria-controls="navBarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
 
           <div class="collapse navbar-collapse" id="navBarContent">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Rules</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-              </li>
               <li class="nav-item logged-in hide">
-                <a class="nav-link" id="account-modal" href="#" data-toggle="modal" data-target="#accountModal">Account</a>
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#accountModal">Account</a>
               </li>
               <li class="nav-item logged-in hide">
                 <button class="btn btn btn-secondary my-2 my-sm-0" type="submit" id="log-out">Log-Out</button>
@@ -54,18 +46,18 @@
                   <form class="form" id="sign-in">
                     <div class="form-group">
                       <label for="sign-in-email">Email address</label>
-                      <input type="email" name="credentials[email]" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" required>
+                      <input id="sign-in-email" type="email" name="credentials[email]" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" required>
                     </div>
                     <div class="form-group">
                       <label for="sign-in-password">Password</label>
-                      <input type="password" name="credentials[password]" class="form-control" placeholder="Password" required>
+                      <input id="sign-in-password" type="password" name="credentials[password]" class="form-control" placeholder="Password" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
                 </div>
                 <div class="card-footer bg-transparent">
                   <label>New User?
-                    <a class="sign-up" data-toggle="modal" data-target="#signUpModal">Sign-up</a>
+                    <a class="sign-up clickable" data-toggle="modal" data-target="#signUpModal">Sign-up</a>
                   </label>
                 </div>
               </div>
@@ -73,26 +65,25 @@
           </div>
         </div>
 
-
         <div class="container logged-in hide" id="board">
           <div class="row">
-            <div class="col-lg-9">
+            <div class="col-lg-9 game-board">
               <div class="row">
-                <div class="col-12 game-board">
+                <div class="col-12">
                   <div class="row game-row">
-                    <div class="col-4 square upper first not-selected" data-id=0></div>
-                    <div class="col-4 square upper second not-selected" data-id=1></div>
-                    <div class="col-4 square upper third not-selected" data-id=2></div>
+                    <div class="col-4 clickable square upper first not-selected" data-id=0></div>
+                    <div class="col-4 clickable square upper second not-selected" data-id=1></div>
+                    <div class="col-4 clickable square upper third not-selected" data-id=2></div>
                   </div>
                   <div class="row game-row">
-                    <div class="col-4 square middle first not-selected" data-id=3></div>
-                    <div class="col-4 square middle second not-selected" data-id=4></div>
-                    <div class="col-4 square middle third not-selected" data-id=5 ></div>
+                    <div class="col-4 clickable square middle first not-selected" data-id=3></div>
+                    <div class="col-4 clickable square middle second not-selected" data-id=4></div>
+                    <div class="col-4 clickable square middle third not-selected" data-id=5 ></div>
                   </div>
                   <div class="row game-row">
-                    <div class="col-4 square bottom first not-selected" data-id=6></div>
-                    <div class="col-4 square bottom second not-selected" data-id=7></div>
-                    <div class="col-4 square bottom third not-selected" data-id=8></div>
+                    <div class="col-4 clickable square bottom first not-selected" data-id=6></div>
+                    <div class="col-4 clickable square bottom second not-selected" data-id=7></div>
+                    <div class="col-4 clickable square bottom third not-selected" data-id=8></div>
                   </div>
                 </div>
               </div>
@@ -111,17 +102,17 @@
                   </div>
                   <div class="row down">
                     <div class="col-4">
-                      <div id="x-score">
+                      <div id="x-score" class="score">
                         0
                       </div>
                     </div>
                     <div class="col-4">
-                      <div id="ties">
+                      <div id="ties" class="score">
                         0
                       </div>
                     </div>
                     <div class="col-4">
-                      <div id="o-score">
+                      <div id="o-score" class="score">
                         0
                       </div>
                     </div>
@@ -129,29 +120,75 @@
                   <div class="col-12 restart">
                     <div class="row">
                       <div class="dropdown">
-                        <button id="players-button" class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button id="players-button" class="btn btn-primary dropdown-toggle one-player" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           2P
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                           <a class="dropdown-item" href="#" id="single-player">Single Player</a>
                           <a class="dropdown-item active" href="#" id="double-player">Double Player</a>
                         </div>
-                        <button id="restart-button" class="btn btn-primary" type="button">Restart</button>
+                        <button id="restart-button" class="btn btn-primary one-player" type="button">Restart</button>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 side"> Available Games
+            <div class="col-lg-3 side">
+              <div class="card text-white bg-dark mb-3">
+                <div class="card-header">
+                  Multiplayer
+                </div>
+                <div class="card-body">
+                  <div id="main-multiplayer">
+                    <button type="button" id="host" class="btn btn-primary">Host</button>
+                    <button type="button" id="guest" class="btn btn-primary">Guest</button>
+                  </div>
+                  <div id="host-multiplayer" class="hide second-screen">
+                    <div>
+                      <span>Game number:</span>
+                      <span class="game-number">0</span>
+                      <br>
+                      <span>Waiting for oponent:</span>
+                      <span class="time-remaining"></span>
+                    </div>
+                    <div>
+                      <button type="button" class="btn btn-primary cancel">Cancel</button>
+                      <button type="button" id="again-host" class="btn btn-primary">Again</button>
+                    </div>
+                  </div>
+                  <div id="guest-multiplayer" class="hide second-screen">
+                    <form class="form" id="join">
+                      <span id="join-failed" class="hide error">Failed to join game!</span>
+                      <div class="form-group join">
+                        <label for="join-game" class="join">Join</label>
+                        <input id="join-game" type="number" name="game[id]" class="form-control join" aria-describedby="emailHelp" placeholder="number" required>
+                      </div>
+                      <button type="button" class="btn btn-primary cancel">Cancel</button>
+                      <button type="submit" class="btn btn-primary">Join</button>
+                    </form>
+                  </div>
+                  <div id="joined-multiplayer"  class="hide">
+                    <div>
+                      <span>Oponent:</span>
+                      <span id="oponent"></span>
+                      <br>
+                      <span>Game number:</span>
+                      <span class="game-number">0</span>
+                      <br>
+                      <span>Waiting for Move:</span>
+                      <span class="time-remaining"></span>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="exit">Exit</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </main>
-      <footer>
-      </footer>
 
-      <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -184,7 +221,7 @@
         </div>
       </div>
 
-      <div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -220,7 +257,6 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
             </div>
           </div>
         </div>
