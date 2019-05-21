@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Tic-Tac-Toe</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+    <body>
+      <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <h1 class="navbar-brand">
+            Tic-Tac-Toe
+          </h1>
+          <h2 id="error"class="error hide">Something went wrong!</h2>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBarContent" aria-controls="navBarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navBarContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item logged-in hide">
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#accountModal">Account</a>
+              </li>
+              <li class="nav-item logged-in hide">
+                <button class="btn btn btn-secondary my-2 my-sm-0" type="submit" id="log-out">Log-Out</button>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <div class="container" id="main-page">
+          <div class="row" id="sign-in-box">
+            <div class="col-sm-12 box">
+              <div class="card text-white bg-dark mb-3">
+                <div class="card-header">
+                  Sign-In
+                </div>
+                <div class="card-body">
+                  <form class="form" id="sign-in">
+                    <div class="form-group">
+                      <label for="sign-in-email">Email address</label>
+                      <input id="sign-in-email" type="email" name="credentials[email]" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="sign-in-password">Password</label>
+                      <input id="sign-in-password" type="password" name="credentials[password]" class="form-control" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+                </div>
+                <div class="card-footer bg-transparent">
+                  <label>New User?
+                    <a class="sign-up clickable" data-toggle="modal" data-target="#signUpModal">Sign-up</a>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container logged-in hide" id="board">
+          <div class="row">
+            <div class="col-lg-9 game-board">
+              <div class="row">
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-4 clickable square upper first not-selected" data-id=0></div>
+                    <div class="col-4 clickable square upper second not-selected" data-id=1></div>
+                    <div class="col-4 clickable square upper not-selected" data-id=2></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4 clickable square middle first not-selected" data-id=3></div>
+                    <div class="col-4 clickable square middle second not-selected" data-id=4></div>
+                    <div class="col-4 clickable square middle not-selected" data-id=5 ></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4 clickable square first not-selected" data-id=6></div>
+                    <div class="col-4 clickable square second not-selected" data-id=7></div>
+                    <div class="col-4 clickable square not-selected" data-id=8></div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="row down">
+                    <div class="col-4 player-x">
+                      Player(x)
+                    </div>
+                    <div class="col-4 player-ties">
+                      Ties
+                    </div>
+                    <div class="col-4 player-o">
+                      Player(O)
+                    </div>
+                  </div>
+                  <div class="row down">
+                    <div class="col-4">
+                      <div id="x-score" class="player-x">
+                        0
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div id="ties" class="player-ties">
+                        0
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div id="o-score" class="player-o">
+                        0
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 restart">
+                    <div class="row">
+                      <div class="dropdown">
+                        <button id="players-button" class="btn btn-primary dropdown-toggle one-player" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          2P
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#" id="single-player">Single Player</a>
+                          <a class="dropdown-item active" href="#" id="double-player">Double Player</a>
+                        </div>
+                        <button id="restart-button" class="btn btn-primary one-player" type="button">Restart</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 side">
+              <div class="card text-white bg-dark mb-3">
+                <div class="card-header">
+                  Multiplayer
+                </div>
+                <div class="card-body">
+                  <div id="main-multiplayer">
+                    <button type="button" id="host" class="btn btn-primary">Host</button>
+                    <button type="button" id="guest" class="btn btn-primary">Guest</button>
+                  </div>
+                  <div id="host-multiplayer" class="hide second-screen">
+                    <div>
+                      <span>Game number:</span>
+                      <span class="game-number">0</span>
+                      <br>
+                      <span>Waiting for oponent:</span>
+                      <span class="time-remaining"></span>
+                    </div>
+                    <div>
+                      <button type="button" class="btn btn-primary cancel">Cancel</button>
+                      <button type="button" id="again-host" class="btn btn-primary">Again</button>
+                    </div>
+                  </div>
+                  <div id="guest-multiplayer" class="hide second-screen">
+                    <form class="form" id="join">
+                      <span id="join-failed" class="hide error">Failed to join game!</span>
+                      <div class="form-group form">
+                        <label for="join-game" class="join">Join</label>
+                        <input id="join-game" type="number" name="game[id]" class="form-control" aria-describedby="emailHelp" placeholder="number" required>
+                      </div>
+                      <button type="button" class="btn btn-primary cancel">Cancel</button>
+                      <button type="submit" class="btn btn-primary">Join</button>
+                    </form>
+                  </div>
+                  <div id="joined-multiplayer"  class="hide">
+                    <div>
+                      <span>Oponent:</span>
+                      <span id="oponent"></span>
+                      <br>
+                      <span>Game number:</span>
+                      <span class="game-number">0</span>
+                      <br>
+                      <span>Waiting for Move:</span>
+                      <span class="time-remaining"></span>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="exit">Exit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Sign Up</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="card-body">
+                <form class="form" id="sign-up">
+                  <div class="form-group">
+                    <label for="sign-up-email">Email address</label>
+                    <input type="email" name="credentials[email]" class="form-control" id="sign-up-email" aria-describedby="emailHelp" placeholder="Enter email" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="sign-up-password">Password</label>
+                    <input type="password" name="credentials[password]" class="form-control" id="sign-up-password" placeholder="Password" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="sign-up-password-confirmation">Confirm Password</label>
+                    <input type="password" name="credentials[password_confirmation]" class="form-control" id="sign-up-password-confirmation" placeholder="Password" required/>
+                  </div>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Account</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div>
+                <span>Games Finished:</span>
+                <span id="games-finished">0</span>
+              </div>
+              <div>
+                <span>Games Started</span>
+                <span id="games-started">0</span>
+              </div>
+              <hr>
+              <div class="card-body">
+                <form class="form" id="change-password">
+                  <h5>Change Password:</h5>
+                  <div class="form-group">
+                    <label for="old-password">Enter Old Password:</label>
+                    <input type="password" name="passwords[old]" class="form-control" id="old-password" placeholder="Old Password" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="new-password">Enter New Password:</label>
+                    <input type="password" name="passwords[new]" class="form-control" id="new-password" placeholder="New Password" required/>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+</html>
