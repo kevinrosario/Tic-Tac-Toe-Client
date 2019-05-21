@@ -3,7 +3,6 @@
 const store = require('./store.js')
 
 const checkSquare = (position) => {
-  console.log(store.game.cells[position] === '' && !(store.game.cells[position] === 'X' || store.game.cells[position] === 'O'))
   if (store.game.cells[position] === '' && !(store.game.cells[position] === 'X' || store.game.cells[position] === 'O')) {
     store.game.cells[position] = store.xTurn ? 'X' : 'O'
     return store.game.cells[position]

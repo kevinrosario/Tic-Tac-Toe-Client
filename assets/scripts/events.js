@@ -107,7 +107,6 @@ const onSquareClicked = (event) => {
     setTimeout(() => {
       store.game.cells[computerIndex] = computerLetter
       addLetterToSquare(computerIndex, computerLetter)
-      console.log(store.game)
     }, 250)
   }
 }
