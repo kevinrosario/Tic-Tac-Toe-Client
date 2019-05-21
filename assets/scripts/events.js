@@ -82,6 +82,7 @@ const onRestart = () => {
   ui.restartBoard()
   ui.showMultiplayer()
   ui.removeErrorSignal()
+  ui.restartForms()
 }
 
 const onSquareClicked = (event) => {
@@ -90,8 +91,11 @@ const onSquareClicked = (event) => {
     const letter = game.checkSquare(index)
     if (letter !== undefined) {
       addLetterToSquare(index, letter)
+    } else {
+      return
     }
   }
+
   if (store.isOnline && store.isMyTurn) {
     store.isMyTurn = false
     waitForMove(store.game.id)
@@ -101,7 +105,9 @@ const onSquareClicked = (event) => {
     const computerIndex = game.computerChoice()
     const computerLetter = game.checkSquare(computerIndex)
     setTimeout(() => {
+      store.game.cells[computerIndex] = computerLetter
       addLetterToSquare(computerIndex, computerLetter)
+      console.log(store.game)
     }, 250)
   }
 }
@@ -112,7 +118,6 @@ const addLetterToSquare = (index, letter) => {
   if (game.checkWinning() !== -1) {
     store.isOver = true
     ui.updateScore(letter)
-    ui.onShowWin()
     api.update(index, letter, true)
       .then((responseData) => {
         store.game = responseData.game
@@ -123,7 +128,6 @@ const addLetterToSquare = (index, letter) => {
   } else if (game.checkTie()) {
     store.isOver = true
     ui.updateTie()
-    ui.onShowTie()
     api.update(index, letter, true)
       .then((responseData) => {
         store.game = responseData.game
@@ -185,11 +189,13 @@ const onHost = (event) => {
   ui.onShowHost()
   store.endRequests = false
   store.isMyTurn = false
+  store.singlePlayer = false
   waitForOponent(store.game.id)
 }
 
 const onGuest = (event) => {
   event.preventDefault()
+  store.singlePlayer = false
   ui.onShowGuest()
 }
 
@@ -297,10 +303,6 @@ const waitForMove = (id) => {
       })
   }, 200)
   const clear = setTimeout(() => {
-    // onRestart()
-    // ui.onExitMultiplayer()
-    // ui.onShowWin()
-    // ui.showOnePlayer()
     clearInterval(interval)
   }, 10000)
 }

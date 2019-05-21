@@ -14,14 +14,13 @@
     <body>
       <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <h2 class="navbar-brand">
+          <h1 class="navbar-brand">
             Tic-Tac-Toe
-          </h2>
+          </h1>
           <h2 id="error"class="error hide">Something went wrong!</h2>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBarContent" aria-controls="navBarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-
           <div class="collapse navbar-collapse" id="navBarContent">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item logged-in hide">
@@ -70,49 +69,49 @@
             <div class="col-lg-9 game-board">
               <div class="row">
                 <div class="col-12">
-                  <div class="row game-row">
+                  <div class="row">
                     <div class="col-4 clickable square upper first not-selected" data-id=0></div>
                     <div class="col-4 clickable square upper second not-selected" data-id=1></div>
-                    <div class="col-4 clickable square upper third not-selected" data-id=2></div>
+                    <div class="col-4 clickable square upper not-selected" data-id=2></div>
                   </div>
-                  <div class="row game-row">
+                  <div class="row">
                     <div class="col-4 clickable square middle first not-selected" data-id=3></div>
                     <div class="col-4 clickable square middle second not-selected" data-id=4></div>
-                    <div class="col-4 clickable square middle third not-selected" data-id=5 ></div>
+                    <div class="col-4 clickable square middle not-selected" data-id=5 ></div>
                   </div>
-                  <div class="row game-row">
-                    <div class="col-4 clickable square bottom first not-selected" data-id=6></div>
-                    <div class="col-4 clickable square bottom second not-selected" data-id=7></div>
-                    <div class="col-4 clickable square bottom third not-selected" data-id=8></div>
+                  <div class="row">
+                    <div class="col-4 clickable square first not-selected" data-id=6></div>
+                    <div class="col-4 clickable square second not-selected" data-id=7></div>
+                    <div class="col-4 clickable square not-selected" data-id=8></div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-12">
                   <div class="row down">
-                    <div class="col-4">
+                    <div class="col-4 player-x">
                       Player(x)
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 player-ties">
                       Ties
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 player-o">
                       Player(O)
                     </div>
                   </div>
                   <div class="row down">
                     <div class="col-4">
-                      <div id="x-score" class="score">
+                      <div id="x-score" class="player-x">
                         0
                       </div>
                     </div>
                     <div class="col-4">
-                      <div id="ties" class="score">
+                      <div id="ties" class="player-ties">
                         0
                       </div>
                     </div>
                     <div class="col-4">
-                      <div id="o-score" class="score">
+                      <div id="o-score" class="player-o">
                         0
                       </div>
                     </div>
@@ -160,9 +159,9 @@
                   <div id="guest-multiplayer" class="hide second-screen">
                     <form class="form" id="join">
                       <span id="join-failed" class="hide error">Failed to join game!</span>
-                      <div class="form-group join">
+                      <div class="form-group form">
                         <label for="join-game" class="join">Join</label>
-                        <input id="join-game" type="number" name="game[id]" class="form-control join" aria-describedby="emailHelp" placeholder="number" required>
+                        <input id="join-game" type="number" name="game[id]" class="form-control" aria-describedby="emailHelp" placeholder="number" required>
                       </div>
                       <button type="button" class="btn btn-primary cancel">Cancel</button>
                       <button type="submit" class="btn btn-primary">Join</button>
@@ -236,7 +235,7 @@
                 <span id="games-finished">0</span>
               </div>
               <div>
-                <span>Games started</span>
+                <span>Games Started</span>
                 <span id="games-started">0</span>
               </div>
               <hr>

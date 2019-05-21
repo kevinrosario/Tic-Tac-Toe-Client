@@ -1,10 +1,12 @@
 @import '~bootstrap/scss/bootstrap';
 @import './colors';
 @import './theme';
+@import url('https://fonts.googleapis.com/css?family=EB+Garamond:400,500,700|Shadows+Into+Light&display=swap');
 
 html,
 body {
   background-color: $main-color;
+  font-family: 'EB Garamond', serif;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -52,6 +54,7 @@ main {
 }
 
 .square {
+  font-family: 'Shadows Into Light', cursive;
   font-size: 80px;
   font-weight: bold;
   height: 100px;
@@ -72,12 +75,20 @@ main {
   border-bottom: 4px solid $black;
 }
 
-.win-horizontal {
-  border-bottom: 4px solid $white;
+.x-win-horizontal {
+  border-bottom: 4px solid $light-gray;
 }
 
-.win-vertical {
-  border-right: 4px solid $white;
+.x-win-vertical {
+  border-right: 4px solid $light-gray;
+}
+
+.o-win-horizontal {
+  border-bottom: 4px solid $yellow;
+}
+
+.o-win-vertical {
+  border-right: 4px solid $yellow;
 }
 
 .tie-horizontal {
@@ -86,6 +97,18 @@ main {
 
 .tie-vertical {
   border-right: 4px solid $red;
+}
+
+.on-x-won {
+  color: $light-gray;
+}
+
+.on-o-won {
+  color: $yellow;
+}
+
+.on-tie {
+  color: $red;
 }
 
 @media (min-width: 576px) {

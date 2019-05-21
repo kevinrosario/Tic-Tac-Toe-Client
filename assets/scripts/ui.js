@@ -33,6 +33,7 @@ const onSignUpFailure = (responseData) => {
 }
 
 const onLogOutSuccess = () => {
+  $('.collapse').collapse('hide')
   $('#main-page').show()
   $('.logged-in').hide()
   restartBoard()
@@ -72,44 +73,41 @@ const clearModal = () => {
   removeInvalid('#new-password')
 }
 
-const onShowWin = () => {
+const onShowWin = (addWinHorizontal, addWinVertical, removeWinHorizontal, removeWinVertical) => {
   let repeat = true
   const seconds = setInterval(() => {
     if (repeat) {
       repeat = !repeat
-      winVertical()
-      winHorizontal()
+      addWinHorizontal()
+      addWinVertical()
     } else {
       repeat = !repeat
-      removeWinVertical()
       removeWinHorizontal()
+      removeWinVertical()
     }
   }, 300)
   setTimeout(() => {
     clearInterval(seconds)
   }, 3000)
-  removeWinVertical()
   removeWinHorizontal()
+  removeWinVertical()
 }
 
-const onShowTie = () => {
+const flashScore = (element, color) => {
   let repeat = true
   const seconds = setInterval(() => {
     if (repeat) {
       repeat = !repeat
-      tieVertical()
-      tieHorizontal()
+      $(`.${element}`).addClass(color)
     } else {
       repeat = !repeat
-      removeTieVertical()
-      removeTieHorizontal()
+      $(`.${element}`).removeClass(color)
     }
   }, 300)
   setTimeout(() => {
     clearInterval(seconds)
   }, 3000)
-  removeTieVertical()
-  removeTieHorizontal()
+  $(`.${element}`).removeClass(color)
 }
 
 const addXorO = (target, text) => {
@@ -157,15 +155,21 @@ const updateScore = (letter) => {
   if (letter === 'X') {
     store.xWons += 1
     $('#x-score').text(store.xWons)
+    flashScore('player-x', 'on-x-won')
+    onShowWin(xWinHorizontal, xWinVertical, removeXWinHorizontal, removeXWinVertical)
   } else {
     store.oWons += 1
     $('#o-score').text(store.oWons)
+    flashScore('player-o', 'on-o-won')
+    onShowWin(oWinHorizontal, oWinVertical, removeOWinHorizontal, removeOWinVertical)
   }
 }
 
 const updateTie = () => {
   store.ties += 1
   $('#ties').text(store.ties)
+  flashScore('player-ties', 'on-tie')
+  onShowWin(tieHorizontal, tieVertical, removeTieHorizontal, removeTieVertical)
 }
 
 const addSuccess = (target) => {
@@ -188,24 +192,44 @@ const removeInvalid = (target) => {
   }
 }
 
-const winHorizontal = () => {
-  $('.upper').addClass('win-horizontal')
-  $('.middle').addClass('win-horizontal')
+const xWinHorizontal = () => {
+  $('.upper').addClass('x-win-horizontal')
+  $('.middle').addClass('x-win-horizontal')
 }
 
-const winVertical = () => {
-  $('.first').addClass('win-vertical')
-  $('.second').addClass('win-vertical')
+const xWinVertical = () => {
+  $('.first').addClass('x-win-vertical')
+  $('.second').addClass('x-win-vertical')
 }
 
-const removeWinHorizontal = () => {
-  $('.upper').removeClass('win-horizontal')
-  $('.middle').removeClass('win-horizontal')
+const removeXWinHorizontal = () => {
+  $('.upper').removeClass('x-win-horizontal')
+  $('.middle').removeClass('x-win-horizontal')
 }
 
-const removeWinVertical = () => {
-  $('.first').removeClass('win-vertical')
-  $('.second').removeClass('win-vertical')
+const removeXWinVertical = () => {
+  $('.first').removeClass('x-win-vertical')
+  $('.second').removeClass('x-win-vertical')
+}
+
+const oWinHorizontal = () => {
+  $('.upper').addClass('o-win-horizontal')
+  $('.middle').addClass('o-win-horizontal')
+}
+
+const oWinVertical = () => {
+  $('.first').addClass('o-win-vertical')
+  $('.second').addClass('o-win-vertical')
+}
+
+const removeOWinHorizontal = () => {
+  $('.upper').removeClass('o-win-horizontal')
+  $('.middle').removeClass('o-win-horizontal')
+}
+
+const removeOWinVertical = () => {
+  $('.first').removeClass('o-win-vertical')
+  $('.second').removeClass('o-win-vertical')
 }
 
 const tieHorizontal = () => {
@@ -319,7 +343,6 @@ module.exports = {
   updateTie,
   clearModal,
   onShowWin,
-  onShowTie,
   setGameNumber,
   onShowHost,
   onShowGuest,
@@ -336,5 +359,6 @@ module.exports = {
   setTimer,
   onJoinGameFailure,
   errorSignal,
-  removeErrorSignal
+  removeErrorSignal,
+  restartForms
 }

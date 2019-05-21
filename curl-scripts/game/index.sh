@@ -1,4 +1,4 @@
-#!/bin/bash
+s#!/bin/bash
 
 curl "https://tic-tac-toe-wdi.herokuapp.com/games" \
   --include \
